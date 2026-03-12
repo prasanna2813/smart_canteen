@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart Canteen Menu</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f4f6f9;
+}
+
+header{
+background:#1f2937;
+color:white;
+padding:15px;
+text-align:center;
+font-size:24px;
+}
+
+.section{
+padding:30px;
+}
+
+h2{
+margin-bottom:20px;
+}
+
+.menu{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 3px 8px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+.card img{
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:8px;
+}
+
+.price{
+color:green;
+font-weight:bold;
+}
+
+input{
+width:60px;
+padding:5px;
+margin-top:5px;
+}
+
+button{
+margin-top:10px;
+padding:8px 15px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+.cart-btn{
+position:fixed;
+top:20px;
+right:20px;
+background:#16a34a;
+padding:10px 20px;
+border-radius:5px;
+color:white;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>Smart Canteen Menu</header>
+
+<a href="/cart" class="cart-btn">View Cart</a>
+
+<!-- BREAKFAST -->
+
+<div class="section">
+
+<h2>Breakfast</h2>
+
+<div class="menu">
+
+<div class="card">
+<img src="https://source.unsplash.com/400x300/?dosa">
+<h3>Dosa</h3>
+<p class="price">₹40</p>
+
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Dosa">
+<input type="hidden" name="price" value="40">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/400x300/?idli">
+<h3>Idli</h3>
+<p class="price">₹30</p>
+
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Idli">
+<input type="hidden" name="price" value="30">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/400x300/?poha">
+<h3>Poha</h3>
+<p class="price">₹35</p>
+
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Poha">
+<input type="hidden" name="price" value="35">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- LUNCH -->
+
+<div class="section">
+
+<h2>Lunch</h2>
+
+<div class="menu">
+
+<div class="card">
+<img src="https://source.unsplash.com/400x300/?biryani">
+<h3>Chicken Biryani</h3>
+<p class="price">₹120</p>
+
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Chicken Biryani">
+<input type="hidden" name="price" value="120">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/400x300/?fried-rice">
+<h3>Fried Rice</h3>
+<p class="price">₹90</p>
+
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Fried Rice">
+<input type="hidden" name="price" value="90">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SNACKS -->
+
+<div class="section">
+
+<h2>Snacks</h2>
+
+<div class="menu">
+
+<div class="card">
+<img src="https://source.unsplash.com/400x300/?samosa">
+<h3>Samosa</h3>
+<p class="price">₹20</p>
+
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Samosa">
+<input type="hidden" name="price" value="20">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/400x300/?burger">
+<h3>Burger</h3>
+<p class="price">₹60</p>
+
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Burger">
+<input type="hidden" name="price" value="60">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- JUICES -->
+
+<div class="section">
+
+<h2>Juices</h2>
+
+<div class="menu">
+
+<div class="card">
+<img src="https://source.unsplash.com/400x300/?orange-juice">
+<h3>Orange Juice</h3>
+<p class="price">₹50</p>
+
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Orange Juice">
+<input type="hidden" name="price" value="50">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/400x300/?mango-juice">
+<h3>Mango Juice</h3>
+<p class="price">₹60</p>
+
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Mango Juice">
+<input type="hidden" name="price" value="60">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

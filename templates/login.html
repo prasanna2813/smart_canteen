@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The Green Bites - Login</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+}
+
+.container{
+background:white;
+color:black;
+padding:40px;
+width:350px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+text-align:center;
+}
+
+h1{
+color:#2c5364;
+margin-bottom:5px;
+}
+
+h3{
+margin-top:0;
+color:#666;
+}
+
+#greeting{
+font-weight:bold;
+margin-bottom:20px;
+color:#444;
+}
+
+input{
+width:90%;
+padding:10px;
+margin:10px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:10px;
+border:none;
+background:#2c5364;
+color:white;
+font-size:16px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#203a43;
+}
+
+.quote{
+margin-top:15px;
+font-style:italic;
+color:#555;
+font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>The Green Bites</h1>
+<h3>Smart Canteen System</h3>
+
+<p id="greeting"></p>
+
+<form action="/user" method="post">
+
+<input type="text" name="roll" placeholder="Enter Roll Number" required>
+
+<input type="password" name="password" placeholder="Enter Password" required>
+
+<button type="submit">Login</button>
+
+</form>
+
+<p class="quote">"Fresh Food. Smart Ordering. Happy Campus."</p>
+
+</div>
+
+<script>
+
+let hour = new Date().getHours();
+let greeting = "";
+
+if(hour < 12){
+greeting = "Good Morning ☀️ User";
+}
+else if(hour < 16){
+greeting = "Good Afternoon 🌤 User";
+}
+else if(hour < 20){
+greeting = "Good Evening 🌆 User";
+}
+else{
+greeting = "Good Night 🌙 User";
+}
+
+document.getElementById("greeting").innerText = greeting;
+
+</script>
+
+</body>
+</html>

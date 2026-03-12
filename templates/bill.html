@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart Canteen Bill</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+margin:0;
+}
+
+.container{
+width:60%;
+margin:auto;
+margin-top:60px;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-bottom:20px;
+}
+
+th,td{
+padding:10px;
+text-align:center;
+border-bottom:1px solid #ddd;
+}
+
+th{
+background:#1f2937;
+color:white;
+}
+
+.total{
+text-align:right;
+font-size:20px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.pay-btn{
+display:block;
+width:200px;
+margin:20px auto;
+padding:12px;
+background:#16a34a;
+color:white;
+border:none;
+border-radius:5px;
+font-size:16px;
+cursor:pointer;
+}
+
+.pay-btn:hover{
+background:#15803d;
+}
+
+.footer{
+text-align:center;
+margin-top:30px;
+font-size:18px;
+color:#555;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Smart Canteen Bill</h2>
+
+<table>
+
+<tr>
+<th>Item</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Total</th>
+</tr>
+
+{% for item in cart %}
+
+<tr>
+<td>{{item.item}}</td>
+<td>₹{{item.price}}</td>
+<td>{{item.quantity}}</td>
+<td>₹{{item.total}}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+<div class="total">
+Total Amount: ₹{{total}}
+</div>
+
+<a href="/payment">
+<button class="pay-btn">Pay Now</button>
+</a>
+
+<div class="footer">
+🙏 Thank You!! Visit Again
+</div>
+
+</div>
+
+</body>
+</html>

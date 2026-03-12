@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cart</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+}
+
+.container{
+width:60%;
+margin:auto;
+margin-top:50px;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+
+button{
+padding:10px 20px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Your Cart</h2>
+
+<table>
+
+<tr>
+<th>Item</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Total</th>
+</tr>
+
+{% for item in cart %}
+
+<tr>
+<td>{{item.item}}</td>
+<td>₹{{item.price}}</td>
+<td>{{item.quantity}}</td>
+<td>₹{{item.total}}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+<h3>Total Bill: ₹{{total}}</h3>
+
+<a href="/bill">
+<button>Place Order</button>
+</a>
+
+</div>
+
+</body>
+</html>
