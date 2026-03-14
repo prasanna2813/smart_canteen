@@ -1,186 +1,230 @@
-from flask import Flask,render_template,request,redirect,url_for
-import mysql.connector
-import random
+from flask import Flask, render_template, request, redirect
+import sqlite3
 
 app = Flask(__name__)
 
-
-
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database="smart_canteen"
-)
-
-cursor = db.cursor()
-
-
-
-cart = []
+cart_items = []
 current_user = ""
 
+# DATABASE CREATE
+conn = sqlite3.connect("database.db")
+conn.execute("""
+CREATE TABLE IF NOT EXISTS orders(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+roll TEXT,
+item TEXT,
+price INTEGER,
+qty INTEGER,
+total INTEGER,
+status TEXT
+)
+""")
+conn.close()
 
 
+def get_db():
+    return sqlite3.connect("database.db")
+
+
+# HOME PAGE
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-
-
+# LOGIN PAGE
 @app.route("/login")
 def login():
     return render_template("login.html")
 
 
-
-
-@app.route("/user", methods=["POST"])
-def user():
+# LOGIN CHECK
+@app.route("/login_check", methods=["POST"])
+def login_check():
 
     global current_user
 
     roll = request.form["roll"]
     password = request.form["password"]
 
-    current_user = roll
+    if len(roll) == 6 and password == "svce@1999":
+        current_user = roll
+        return redirect("/userpanel")
+    else:
+        return "Invalid Login"
 
-    return render_template("userpanel.html",roll=roll)
+
+# USER PANEL
+@app.route("/userpanel")
+def userpanel():
+    return render_template("userpanel.html")
 
 
-
-
+# ADD TO CART
 @app.route("/add_to_cart", methods=["POST"])
 def add_to_cart():
 
     item = request.form["item"]
     price = int(request.form["price"])
-    quantity = int(request.form["quantity"])
+    qty = int(request.form["quantity"])
 
-    total = price * quantity
+    total = price * qty
 
-    cart_item = {
-        "item":item,
-        "price":price,
-        "quantity":quantity,
-        "total":total
-    }
-
-    cart.append(cart_item)
+    cart_items.append([item, price, qty, total])
 
     return redirect("/cart")
 
 
-
-
+# CART PAGE
 @app.route("/cart")
-def view_cart():
+def cart():
 
-    total_price = sum(item["total"] for item in cart)
+    total = sum(i[3] for i in cart_items)
 
-    return render_template("cart.html",cart=cart,total=total_price)
-
-
-
-@app.route("/bill")
-def bill():
-
-    total_price = sum(item["total"] for item in cart)
-
-    return render_template("bill.html",cart=cart,total=total_price)
+    return render_template("cart.html", cart=cart_items, total=total)
 
 
+# CHECKOUT
+@app.route("/checkout")
+def checkout():
 
-@app.route("/payment")
-def payment():
+    conn = get_db()
+    cur = conn.cursor()
 
-    total_price = sum(item["total"] for item in cart)
-
-    return render_template("payment.html",total=total_price)
-
-
-
-
-@app.route("/success")
-def success():
-
-    global current_user
-
-    token = random.randint(100,999)
-
-    for item in cart:
-
-        cursor.execute(
-        "INSERT INTO orders (roll_number,item,price,quantity,total,token) VALUES (%s,%s,%s,%s,%s,%s)",
-        (current_user,item["item"],item["price"],item["quantity"],item["total"],token)
+    for item in cart_items:
+        cur.execute(
+            "INSERT INTO orders(roll,item,price,qty,total,status) VALUES(?,?,?,?,?,?)",
+            (current_user, item[0], item[1], item[2], item[3], "Pending")
         )
 
-    db.commit()
+    conn.commit()
+    conn.close()
 
-    cart.clear()
+    cart_items.clear()
 
-    return render_template("success.html",token=token)
-
-
-
-@app.route("/admin")
-def admin():
-    return render_template("adminlogin.html")
+    return redirect("/payment")
 
 
+# PAYMENT PAGE
+@app.route("/payment")
+def payment():
+    return render_template("payment.html")
 
 
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "1234"
+# SUCCESS PAGE
+@app.route("/success")
+def success():
+    return render_template("success.html")
 
-@app.route("/adminlogin", methods=["POST"])
-def adminlogin():
+
+# USER ORDERS (only logged user orders)
+@app.route("/userorders")
+def userorders():
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    orders = cur.execute(
+        "SELECT * FROM orders WHERE roll=?",
+        (current_user,)
+    ).fetchall()
+
+    conn.close()
+
+    return render_template("userorders.html", orders=orders)
+
+
+# ADMIN LOGIN
+@app.route("/admin_check", methods=["POST"])
+def admin_check():
 
     username = request.form["username"]
     password = request.form["password"]
 
-    if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
-        return render_template("admindashboard.html")
+    if username == "admin" and password == "admin123":
+        return redirect("/admin")
     else:
         return "Invalid Admin Login"
 
 
+# ADMIN DASHBOARD
+@app.route("/admin")
+def admin():
 
+    conn = get_db()
+    cur = conn.cursor()
 
-@app.route("/dashboard")
-def dashboard():
-
-    cursor.execute("SELECT * FROM orders")
-
-    orders = cursor.fetchall()
-
-    cursor.execute("SELECT SUM(total) FROM orders")
-
-    total_sales = cursor.fetchone()[0]
+    orders = cur.execute("SELECT * FROM orders").fetchall()
 
     total_orders = len(orders)
+    total_sales = sum(i[5] for i in orders) if orders else 0
 
     return render_template(
         "admindashboard.html",
         orders=orders,
-        total_sales=total_sales,
-        total_orders=total_orders
+        total_orders=total_orders,
+        total_sales=total_sales
     )
-@app.route("/menu")
-def menu():
-    return render_template("userpanel.html")
 
 
+# ACCEPT ORDER
+@app.route("/accept/<int:id>")
+def accept(id):
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("UPDATE orders SET status='Accepted' WHERE id=?", (id,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/admin")
+
+
+# ORDER REACHED
+@app.route("/reached/<int:id>")
+def reached(id):
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("UPDATE orders SET status='Reached' WHERE id=?", (id,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/admin")
+
+
+# DELETE ORDER
 @app.route("/delete/<int:id>")
-def delete_order(id):
+def delete(id):
 
-    cursor.execute("DELETE FROM orders WHERE id=%s",(id,))
-    db.commit()
+    conn = get_db()
+    cur = conn.cursor()
 
-    return redirect("/dashboard")
+    cur.execute("DELETE FROM orders WHERE id=?", (id,))
 
+    conn.commit()
+    conn.close()
 
+    return redirect("/admin")
+@app.route("/status/<int:id>/<status>")
+def status(id, status):
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute(
+        "UPDATE orders SET status=? WHERE id=?",
+        (status, id)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/admin")
 
 
 if __name__ == "__main__":

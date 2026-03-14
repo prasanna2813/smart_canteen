@@ -1,271 +1,629 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Smart Canteen Menu</title>
+<title>Smart Canteen - User Panel</title>
 
 <style>
-
 body{
-font-family:Arial;
-margin:0;
-background:#f4f6f9;
+  font-family:Arial;
+  margin:0;
+  background:#f4f6f9;
 }
-
 header{
-background:#1f2937;
-color:white;
-padding:15px;
-text-align:center;
-font-size:24px;
+  background:#1f2937;
+  color:white;
+  padding:15px;
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
 }
-
 .section{
-padding:30px;
+  padding:30px;
 }
-
 h2{
-margin-bottom:20px;
+  margin-bottom:20px;
+  font-size:28px;
+  color:#111827;
+  border-bottom:2px solid #2563eb;
+  display:inline-block;
+  padding-bottom:5px;
 }
-
 .menu{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
 }
-
 .card{
-background:white;
-padding:15px;
-border-radius:10px;
-box-shadow:0 3px 8px rgba(0,0,0,0.2);
-text-align:center;
+  background:white;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 3px 8px rgba(0,0,0,0.2);
+  text-align:center;
+  transition:transform 0.3s, box-shadow 0.3s;
 }
-
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 6px 12px rgba(0,0,0,0.3);
+}
 .card img{
-width:100%;
-height:150px;
-object-fit:cover;
-border-radius:8px;
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:8px;
+  transition:transform 0.3s;
 }
-
+.card:hover img{
+  transform:scale(1.05);
+}
 .price{
-color:green;
-font-weight:bold;
+  color:green;
+  font-weight:bold;
+  margin:10px 0;
 }
-
 input{
-width:60px;
-padding:5px;
-margin-top:5px;
+  width:60px;
+  padding:5px;
+  margin-top:5px;
 }
-
 button{
-margin-top:10px;
-padding:8px 15px;
-background:#2563eb;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
+  margin-top:10px;
+  padding:8px 15px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  transition:background 0.3s, transform 0.3s;
 }
-
 button:hover{
-background:#1d4ed8;
+  background:#1d4ed8;
+  transform:scale(1.05);
 }
-
 .cart-btn{
-position:fixed;
-top:20px;
-right:20px;
-background:#16a34a;
-padding:10px 20px;
-border-radius:5px;
-color:white;
-text-decoration:none;
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#16a34a;
+  padding:10px 20px;
+  border-radius:5px;
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+  transition:background 0.3s, transform 0.3s;
 }
-
+.cart-btn:hover{
+  background:#15803d;
+  transform:scale(1.05);
+}
 </style>
-
 </head>
-
 <body>
 
-<header>Smart Canteen Menu</header>
+<header>The Green Bites - Menu</header>
 
-<a href="/cart" class="cart-btn">View Cart</a>
+<div class="container">
 
-<!-- BREAKFAST -->
+<div class="top-buttons">
 
-<div class="section">
+<a href="/cart">
+<button>View Cart</button>
+</a>
 
-<h2>Breakfast</h2>
-
-<div class="menu">
-
-<div class="card">
-<img src="https://source.unsplash.com/400x300/?dosa">
-<h3>Dosa</h3>
-<p class="price">₹40</p>
-
-<form action="/add_to_cart" method="post">
-<input type="hidden" name="item" value="Dosa">
-<input type="hidden" name="price" value="40">
-<input type="number" name="quantity" value="1" min="1">
-<button>Add to Cart</button>
-</form>
+<a href="/userorders">
+<button>Track My Orders</button>
+</a>
 
 </div>
 
+<div class="section">
+<h2>Breakfast</h2>
+<div class="menu">
+
 <div class="card">
-<img src="https://source.unsplash.com/400x300/?idli">
+<img src="https://images.slurrp.com/prodarticles/oamtmyaxjs.webp">
 <h3>Idli</h3>
 <p class="price">₹30</p>
-
 <form action="/add_to_cart" method="post">
 <input type="hidden" name="item" value="Idli">
 <input type="hidden" name="price" value="30">
 <input type="number" name="quantity" value="1" min="1">
 <button>Add to Cart</button>
 </form>
-
 </div>
 
 <div class="card">
-<img src="https://source.unsplash.com/400x300/?poha">
+<img src="https://www.awesomecuisine.com/wp-content/uploads/2009/06/Plain-Dosa.jpg">
+<h3>Dosa</h3>
+<p class="price">₹40</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Dosa">
+<input type="hidden" name="price" value="40">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+
+<div class="card">
+<img src="https://i.pinimg.com/736x/a8/e1/8c/a8e18cbd84eeb6c2f3bc4bdfa51860d7.jpg">
 <h3>Poha</h3>
 <p class="price">₹35</p>
-
 <form action="/add_to_cart" method="post">
 <input type="hidden" name="item" value="Poha">
 <input type="hidden" name="price" value="35">
 <input type="number" name="quantity" value="1" min="1">
 <button>Add to Cart</button>
 </form>
-
 </div>
-
-</div>
-
-</div>
-
-<!-- LUNCH -->
-
-<div class="section">
-
-<h2>Lunch</h2>
-
-<div class="menu">
 
 <div class="card">
-<img src="https://source.unsplash.com/400x300/?biryani">
-<h3>Chicken Biryani</h3>
-<p class="price">₹120</p>
-
+<img src="https://melam.com/wp-content/uploads/2022/12/roasted-rawa-1024x683.jpg">
+<h3>Upma</h3>
+<p class="price">₹35</p>
 <form action="/add_to_cart" method="post">
-<input type="hidden" name="item" value="Chicken Biryani">
-<input type="hidden" name="price" value="120">
+<input type="hidden" name="item" value="Upma">
+<input type="hidden" name="price" value="35">
 <input type="number" name="quantity" value="1" min="1">
 <button>Add to Cart</button>
 </form>
-
 </div>
 
 <div class="card">
-<img src="https://source.unsplash.com/400x300/?fried-rice">
-<h3>Fried Rice</h3>
-<p class="price">₹90</p>
-
+<img src="https://tse4.mm.bing.net/th/id/OIP.e6BbMn39DLQnT5slzUwEPwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>Bread and Jam</h3>
+<p class="price">₹25</p>
 <form action="/add_to_cart" method="post">
-<input type="hidden" name="item" value="Fried Rice">
-<input type="hidden" name="price" value="90">
+<input type="hidden" name="item" value="Bread and Jam">
+<input type="hidden" name="price" value="25">
 <input type="number" name="quantity" value="1" min="1">
 <button>Add to Cart</button>
 </form>
-
 </div>
-
-</div>
-
-</div>
-
-<!-- SNACKS -->
-
-<div class="section">
-
-<h2>Snacks</h2>
-
-<div class="menu">
 
 <div class="card">
-<img src="https://source.unsplash.com/400x300/?samosa">
-<h3>Samosa</h3>
-<p class="price">₹20</p>
-
+<img src="https://as2.ftcdn.net/v2/jpg/04/93/56/77/1000_F_493567723_YN7jVzDOXoW2LVs9uYIg5KA3SMvAeUoP.jpg">
+<h3>Pongal</h3>
+<p class="price">₹40</p>
 <form action="/add_to_cart" method="post">
-<input type="hidden" name="item" value="Samosa">
-<input type="hidden" name="price" value="20">
+<input type="hidden" name="item" value="Pongal">
+<input type="hidden" name="price" value="40">
 <input type="number" name="quantity" value="1" min="1">
 <button>Add to Cart</button>
 </form>
-
 </div>
 
 <div class="card">
-<img src="https://source.unsplash.com/400x300/?burger">
-<h3>Burger</h3>
-<p class="price">₹60</p>
-
-<form action="/add_to_cart" method="post">
-<input type="hidden" name="item" value="Burger">
-<input type="hidden" name="price" value="60">
-<input type="number" name="quantity" value="1" min="1">
-<button>Add to Cart</button>
-</form>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- JUICES -->
-
-<div class="section">
-
-<h2>Juices</h2>
-
-<div class="menu">
-
-<div class="card">
-<img src="https://source.unsplash.com/400x300/?orange-juice">
-<h3>Orange Juice</h3>
+<img src="https://facts.net/wp-content/uploads/2021/12/club-sandwich-1536x1024.jpg">
+<h3>Sandwich</h3>
 <p class="price">₹50</p>
-
 <form action="/add_to_cart" method="post">
-<input type="hidden" name="item" value="Orange Juice">
+<input type="hidden" name="item" value="Sandwich">
 <input type="hidden" name="price" value="50">
 <input type="number" name="quantity" value="1" min="1">
 <button>Add to Cart</button>
 </form>
-
 </div>
 
 <div class="card">
-<img src="https://source.unsplash.com/400x300/?mango-juice">
-<h3>Mango Juice</h3>
-<p class="price">₹60</p>
-
+<img src="https://img.freepik.com/premium-photo/crunchy-aloo-paratha-delicacy-popular-street-food-aloo-paratha-alu-paratha-image_1174497-51132.jpg?w=2000">
+<h3>Paratha</h3>
+<p class="price">₹35</p>
 <form action="/add_to_cart" method="post">
-<input type="hidden" name="item" value="Mango Juice">
+<input type="hidden" name="item" value="Paratha">
+<input type="hidden" name="price" value="35">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+
+<div class="card">
+<img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2020/12/poori-puri-recipe.jpg">
+<h3>Puri</h3>
+<p class="price">₹30</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Puri">
+<input type="hidden" name="price" value="30">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+
+<div class="card">
+<img src="https://tse1.mm.bing.net/th/id/OIP._oHWCF_-5oDpq-XfllPD2QHaLH?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>ghee egg dosa</h3>
+<p class="price">₹35</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="ghee egg dosa">
+<input type="hidden" name="price" value="35">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+
+</div>
+</div>
+
+<!-- LUNCH -->
+<div class="section">
+<h2>Lunch</h2>
+<div class="menu">
+
+<div class="card">
+<img src="https://pics.craiyon.com/2023-07-08/b33f3ecbb22249eb828b3b83baeeada4.webp">
+<h3>Chicken Biryani</h3>
+<p class="price">₹150</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Chicken Biryani">
+<input type="hidden" name="price" value="150">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse2.mm.bing.net/th/id/OIP.wJTgF8qg4XiMGGkG5CDRfwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>veg fried rice</h3>
+<p class="price">₹80</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="veg fried rice">
+<input type="hidden" name="price" value="80">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://th.bing.com/th/id/R.8c29d303a4a2b67067b9b37b38a8930e?rik=0AwhLsInECdb4A&riu=http%3a%2f%2feastindianrecipes.net%2fwp-content%2fuploads%2f2022%2f09%2fHow-to-Make-North-Indian-Thali-Vegetarian-7.jpg&ehk=8hsvv2qJ0ZnSHgEKAYh5KkGTK0MxnGuVe3dGekTKJy8%3d&risl=&pid=ImgRaw&r=0">
+<h3>indain thali</h3>
+<p class="price">₹150</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="indian thali">
+<input type="hidden" name="price" value="150">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://pics.craiyon.com/2023-07-08/b33f3ecbb22249eb828b3b83baeeada4.webp">
+<h3>Biryani</h3>
+<p class="price">₹120</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Biryani">
+<input type="hidden" name="price" value="120">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse1.mm.bing.net/th/id/OIP.aIL4gpIYxJSRlVxjTn0yhAHaG6?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3> PannerBiryani</h3>
+<p class="price">₹100</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="PannerBiryani">
+<input type="hidden" name="price" value="100">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse3.mm.bing.net/th/id/OIP.gaB-CYTHaajryDn37vsgAgHaEj?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>Mutton Biryani</h3>
+<p class="price">₹180</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Mutton Biryani">
+<input type="hidden" name="price" value="180">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://vivahabhojanambu.co.in/wp-content/uploads/2021/02/Ragi-Sangati-with-Natu-Kodi-Pulusu.jpg">
+<h3>Ragi sangati with chicken</h3>
+<p class="price">₹90</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="Ragi sangati with chicken">
+<input type="hidden" name="price" value="90">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://shwetainthekitchen.com/wp-content/uploads/2023/03/vegetable-noodles.jpg">
+<h3>veg noodles</h3>
+<p class="price">₹50</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="veg noodles">
+<input type="hidden" name="price" value="50">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://media.istockphoto.com/photos/fried-noodles-with-chicken-directly-above-picture-id1206076029?b=1&k=20&m=1206076029&s=170667a&w=0&h=7Tl3zd-G71-6Dcvf9bC0xpc6lt_Vwc1Vx5AwDRVQ4Aw=">
+<h3>chicken noodles</h3>
+<p class="price">₹80</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="chicken noodles">
+<input type="hidden" name="price" value="80">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse1.mm.bing.net/th/id/OIP.rZzKsAqwfLKbB_Eu4Ow0EQHaFP?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>curd rice</h3>
+<p class="price">₹60</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="curd rice">
 <input type="hidden" name="price" value="60">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse4.mm.bing.net/th/id/OIP.etdWA1My4pNi2-BrYdtxLgHaE7?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>gobi rice</h3>
+<p class="price">₹60</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="gobi rice">
+<input type="hidden" name="price" value="60">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8KUUfc7A-5hchUMeM99mfClwPvbVPW4Ib5Q&s">
+<h3>soya chunks pulav</h3>
+<p class="price">₹100</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="soya chunks pulav">
+<input type="hidden" name="price" value="100">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+
+
+<!-- Add remaining 9 lunch items in same format using your original image list -->
+<!-- Example: veg Fried Rice, Indian Thali, Paneer Biriyani, mutton biriyani, Ragi sangati with chicken, veg Noodles, chickenNoodles, curd rice, gobi rice, soyachunks rice -->
+
+</div>
+</div>
+
+<!-- SNACKS -->
+<div class="section">
+<h2>Snacks</h2>
+<div class="menu">
+<div class="card">
+<img src="https://pics.craiyon.com/2023-07-08/b33f3ecbb22249eb828b3b83baeeada4.webp">
+<h3>fruitmixes</h3>
+<p class="price">₹40</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="fruitmixes">
+<input type="hidden" name="price" value="40">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://static.vecteezy.com/system/resources/previews/030/674/042/non_2x/product-shots-of-milkshake-high-quality-4k-ultra-free-photo.jpg">
+<h3>milkshakes</h3>
+<p class="price">₹40</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="milkshakes">
+<input type="hidden" name="price" value="40">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2018/12/tandoori-chicken.jpg">
+<h3>tandoori</h3>
+<p class="price">₹80</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="tandoori">
+<input type="hidden" name="price" value="80">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://www.pizzainn.com/wp-content/uploads/2019/12/Buffet-Close-pizzas-APPROVED.jpg">
+<h3>pizza</h3>
+<p class="price">₹100</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="pizza">
+<input type="hidden" name="price" value="100">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://img.freepik.com/premium-photo/set-burgers-with-beef-tomatoes-cheese-onions-salad-street-food-top-view-black-stone-background_187166-62455.jpg?w=2000">
+<h3>burger</h3>
+<p class="price">₹70</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="burger">
+<input type="hidden" name="price" value="70">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse1.mm.bing.net/th/id/OIP.eUsMNX2x8YcmrWukKaTxEQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>pasta</h3>
+<p class="price">₹60</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="pasta">
+<input type="hidden" name="price" value="60">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://www.masalakorb.com/wp-content/uploads/2023/02/EASY-MYSORE-BONDA-RECIPE-MAIDA-BONDA-MYSORE-BAJJI-V1.jpg">
+<h3>mysore bonda</h3>
+<p class="price">₹40</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="mysore bonda">
+<input type="hidden" name="price" value="40">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://www.thechunkychef.com/wp-content/uploads/2021/03/Chicken-Shawarma-recipe-card.jpg">
+<h3>shawarma
+</h3>
+<p class="price">₹120</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="shawarma">
+<input type="hidden" name="price" value="120">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse2.mm.bing.net/th/id/OIP.dwNCU9FF9iewad7LiVBf5gHaE8?w=768&h=513&rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>panipuri</h3>
+<p class="price">₹30</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="panipuri">
+<input type="hidden" name="price" value="30">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse2.mm.bing.net/th/id/OIP.wJTgF8qg4XiMGGkG5CDRfwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>samosa</h3>
+<p class="price">₹20</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="samosa">
+<input type="hidden" name="price" value="20">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+
+<!-- Add 10 snack items here with your images and names like fruit mixes, milkshakes, Tandoori, Pizza, Burger, Pasta, Roll, Shawarma, Fried Chicken, Salad -->
+</div>
+</div>
+
+<!-- DINNER -->
+<div class="section">
+<h2>Dinner</h2>
+<div class="menu">
+<div class="card">
+<img src="https://tse1.mm.bing.net/th/id/OIP.iABVK73UYywVNC4mweoCjgHaGN?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>chapathi</h3>
+<p class="price">₹40</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="chapathi">
+<input type="hidden" name="price" value="40">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://holycowvegan.net/wp-content/uploads/2025/05/vegan-naan-12-1.jpg">
+<h3>butter naan</h3>
+<p class="price">₹50</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="butter naan">
+<input type="hidden" name="price" value="50">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse1.mm.bing.net/th/id/OIP.yOk4WPwApHXLfI-1G8nYRAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>dal and rice</h3>
+<p class="price">₹60</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="dal and rice">
+<input type="hidden" name="price" value="60">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse2.mm.bing.net/th/id/OIP.NIlfjtaKMIwD24C51ox5FAHaLH?w=768&h=1152&rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>butter chicken</h3>
+<p class="price">₹80</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="butter chicken">
+<input type="hidden" name="price" value="80">
+<input type="number" name="quantity" value="1" min="1">
+<button>Addto Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse3.mm.bing.net/th/id/OIP.-bpd2PpbLnZQS7O_pJvOMgHaFj?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>egg curry</h3>
+<p class="price">₹50</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="egg curry">
+<input type="hidden" name="price" value="50">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse3.mm.bing.net/th/id/OIP.FlkYtllqlGtOW-0ayStb5gHaE8?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>palak panner</h3>
+<p class="price">₹70</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="palak panner">
+<input type="hidden" name="price" value="70">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://vegetablerecipes.com/wp-content/uploads/2022/07/Mushroom-Rice-3-1-of-1-442x442.jpg">
+<h3>mushroom rice</h3>
+<p class="price">₹70</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="mushroom rice">
+<input type="hidden" name="price" value="70">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse1.mm.bing.net/th/id/OIP.rZzKsAqwfLKbB_Eu4Ow0EQHaFP?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>curd rice</h3>
+<p class="price">₹50</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="curd rice">
+<input type="hidden" name="price" value="50">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://tse2.mm.bing.net/th/id/OIP.Bfyzdw5XoEZzPlIPWuBCbwHaE9?rs=1&pid=ImgDetMain&o=7&rm=3">
+<h3>rasam</h3>
+<p class="price">₹40</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="rasam">
+<input type="hidden" name="price" value="40">
+<input type="number" name="quantity" value="1" min="1">
+<button>Add to Cart</button>
+</form>
+</div>
+<div class="card">
+<img src="https://b2958125.smushcdn.com/2958125/wp-content/uploads/Madras-Style-Murungakkai-Sambar-kannammacooks.com-Recipe-Tamilnadu-Madras-style-murungakkai-sambar-idli-Indian-Chennai-drumstick.jpg?lossy=1&strip=1&webp=1">
+<h3>sambar</h3>
+<p class="price">₹40</p>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="item" value="sambar">
+<input type="hidden" name="price" value="40">
 <input type="number" name="quantity" value="1" min="1">
 <button>Add to Cart</button>
 </form>
 
 </div>
-
+<!-- Add 10 dinner items here with same images as snacks or dinner list -->
 </div>
-
 </div>
 
 </body>

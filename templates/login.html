@@ -72,6 +72,11 @@ color:#555;
 font-size:14px;
 }
 
+.error{
+color:red;
+font-size:14px;
+}
+
 </style>
 
 </head>
@@ -85,11 +90,13 @@ font-size:14px;
 
 <p id="greeting"></p>
 
-<form action="/user" method="post">
+<form action="/login_check" method="POST" onsubmit="return validateLogin()">
 
-<input type="text" name="roll" placeholder="Enter Roll Number" required>
+<input type="text" id="roll" name="roll" placeholder="Enter Roll Number" required>
 
-<input type="password" name="password" placeholder="Enter Password" required>
+<input type="password" id="password" name="password" placeholder="Enter Password" required>
+
+<p id="error" class="error"></p>
 
 <button type="submit">Login</button>
 
@@ -101,23 +108,44 @@ font-size:14px;
 
 <script>
 
-let hour = new Date().getHours();
-let greeting = "";
+function validateLogin(){
 
-if(hour < 12){
-greeting = "Good Morning ☀️ User";
+let roll=document.getElementById("roll").value;
+let password=document.getElementById("password").value;
+let error=document.getElementById("error");
+
+let rollPattern=/^[0-9]{6}$/;
+
+if(!rollPattern.test(roll)){
+error.innerText="Roll Number must be exactly 6 digits";
+return false;
 }
-else if(hour < 16){
-greeting = "Good Afternoon 🌤 User";
+
+if(password!=="svce@1999"){
+error.innerText="Password must be svce@1999";
+return false;
 }
-else if(hour < 20){
-greeting = "Good Evening 🌆 User";
+
+return true;
+}
+
+let hour=new Date().getHours();
+let greeting="";
+
+if(hour<12){
+greeting="Good Morning ☀️ User";
+}
+else if(hour<16){
+greeting="Good Afternoon 🌤 User";
+}
+else if(hour<20){
+greeting="Good Evening 🌆 User";
 }
 else{
-greeting = "Good Night 🌙 User";
+greeting="Good Night 🌙 User";
 }
 
-document.getElementById("greeting").innerText = greeting;
+document.getElementById("greeting").innerText=greeting;
 
 </script>
 

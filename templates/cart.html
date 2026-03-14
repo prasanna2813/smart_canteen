@@ -4,42 +4,39 @@
 <title>Cart</title>
 
 <style>
-
 body{
-font-family:Arial;
-background:#f4f6f9;
+  font-family:Arial;
+  background:#f4f6f9;
 }
-
 .container{
-width:60%;
-margin:auto;
-margin-top:50px;
-background:white;
-padding:30px;
-border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  width:60%;
+  margin:auto;
+  margin-top:50px;
+  background:white;
+  padding:30px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
-
 table{
-width:100%;
-border-collapse:collapse;
+  width:100%;
+  border-collapse:collapse;
 }
-
 th,td{
-padding:10px;
-border-bottom:1px solid #ddd;
-text-align:center;
+  padding:10px;
+  border-bottom:1px solid #ddd;
+  text-align:center;
 }
-
 button{
-padding:10px 20px;
-background:#2563eb;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
+  padding:10px 20px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
 }
-
+button:hover{
+  background:#1e40af;
+}
 </style>
 
 </head>
@@ -49,6 +46,10 @@ cursor:pointer;
 <div class="container">
 
 <h2>Your Cart</h2>
+
+{% if cart|length == 0 %}
+<p>Your cart is empty!</p>
+{% else %}
 
 <table>
 
@@ -62,21 +63,25 @@ cursor:pointer;
 {% for item in cart %}
 
 <tr>
-<td>{{item.item}}</td>
-<td>₹{{item.price}}</td>
-<td>{{item.quantity}}</td>
-<td>₹{{item.total}}</td>
+<td>{{ item[0] }}</td>
+<td>₹{{ item[1] }}</td>
+<td>{{ item[2] }}</td>
+<td>₹{{ item[3] }}</td>
 </tr>
 
 {% endfor %}
 
 </table>
 
-<h3>Total Bill: ₹{{total}}</h3>
+<h3>Total Bill: ₹{{ total }}</h3>
 
-<a href="/bill">
+<br>
+
+<a href="/checkout">
 <button>Place Order</button>
 </a>
+
+{% endif %}
 
 </div>
 

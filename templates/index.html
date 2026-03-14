@@ -6,73 +6,134 @@
 <style>
 
 body{
-margin:0;
-font-family:Arial;
-background:linear-gradient(135deg,#134E5E,#71B280);
-color:white;
-text-align:center;
+  margin:0;
+  font-family:Arial;
+  background:linear-gradient(135deg,#134E5E,#71B280);
+  color:white;
+  text-align:center;
+  scroll-behavior:smooth;
 }
 
+/* Header Animation */
 header{
-padding:30px;
-font-size:40px;
-font-weight:bold;
+  padding:30px;
+  font-size:40px;
+  font-weight:bold;
+  animation: fadeSlide 1.5s ease-out;
 }
 
+@keyframes fadeSlide {
+  0% {opacity:0; transform:translateY(-50px);}
+  100% {opacity:1; transform:translateY(0);}
+}
+
+/* Quote Animation */
 .quote{
-font-style:italic;
-margin-bottom:20px;
+  font-style:italic;
+  margin-bottom:20px;
+  opacity:0;
+  animation: fadeIn 2s forwards 1s;
 }
 
+@keyframes fadeIn{
+  to {opacity:1;}
+}
+
+/* Buttons */
 .buttons{
-margin-top:30px;
+  margin-top:30px;
 }
 
 button{
-padding:12px 25px;
-margin:10px;
-border:none;
-border-radius:5px;
-font-size:16px;
-cursor:pointer;
+  padding:12px 25px;
+  margin:10px;
+  border:none;
+  border-radius:5px;
+  font-size:16px;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+button:hover{
+  transform:scale(1.1);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
 }
 
 .login{
-background:#ffffff;
-color:#134E5E;
+  background:#ffffff;
+  color:#134E5E;
 }
 
 .admin{
-background:#ff9800;
-color:white;
+  background:#ff9800;
+  color:white;
 }
 
+/* Menu Sections */
 .menu-section{
-padding:30px;
+  padding:30px;
 }
 
 h2{
-margin-top:40px;
+  margin-top:40px;
+  animation: slideIn 1s ease-out;
 }
 
+@keyframes slideIn{
+  0% {opacity:0; transform:translateX(-50px);}
+  100% {opacity:1; transform:translateX(0);}
+}
+
+/* Grid */
 .grid{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:20px;
-padding:20px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:20px;
+  padding:20px;
 }
 
+/* Menu Items */
 .item{
-background:white;
-color:black;
-padding:10px;
-border-radius:10px;
+  background:white;
+  color:black;
+  padding:10px;
+  border-radius:10px;
+  transform:translateY(20px);
+  opacity:0;
+  animation: itemFade 0.8s forwards;
 }
 
 .item img{
-width:100%;
-height:120px;
-border-radius:8px;
+  width:100%;
+  height:120px;
+  border-radius:8px;
+  transition:transform 0.3s ease, filter 0.3s ease;
+}
+
+.item:hover img{
+  transform:scale(1.1);
+  filter:brightness(1.2);
+}
+
+.item:hover{
+  transform:translateY(-10px) scale(1.05);
+}
+
+/* Staggered animation for items */
+.item:nth-child(1){animation-delay:0.2s;}
+.item:nth-child(2){animation-delay:0.3s;}
+.item:nth-child(3){animation-delay:0.4s;}
+.item:nth-child(4){animation-delay:0.5s;}
+.item:nth-child(5){animation-delay:0.6s;}
+.item:nth-child(6){animation-delay:0.7s;}
+.item:nth-child(7){animation-delay:0.8s;}
+.item:nth-child(8){animation-delay:0.9s;}
+.item:nth-child(9){animation-delay:1s;}
+.item:nth-child(10){animation-delay:1.1s;}
+
+@keyframes itemFade{
+  to {opacity:1; transform:translateY(0);}
 }
 
 </style>
@@ -105,16 +166,16 @@ border-radius:8px;
 
 <div class="grid">
 
-<div class="item"><img src="https://source.unsplash.com/200x200/?idli"><p>Idli</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?dosa"><p>Dosa</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?poha"><p>Poha</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?upma"><p>Upma</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?vada"><p>Vada</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?pongal"><p>Pongal</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?sandwich"><p>Sandwich</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?paratha"><p>Paratha</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?pancake"><p>Pancake</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?omelette"><p>Omelette</p></div>
+<div class="item"><img src="https://images.slurrp.com/prodarticles/oamtmyaxjs.webp"><p>Idli</p></div>
+<div class="item"><img src="https://www.awesomecuisine.com/wp-content/uploads/2009/06/Plain-Dosa.jpg"><p>Dosa</p></div>
+<div class="item"><img src="https://i.pinimg.com/736x/a8/e1/8c/a8e18cbd84eeb6c2f3bc4bdfa51860d7.jpg"><p>Poha</p></div>
+<div class="item"><img src="https://melam.com/wp-content/uploads/2022/12/roasted-rawa-1024x683.jpg"><p>Upma</p></div>
+<div class="item"><img src="https://tse4.mm.bing.net/th/id/OIP.e6BbMn39DLQnT5slzUwEPwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"><p>Bread and jam</p></div>
+<div class="item"><img src="https://as2.ftcdn.net/v2/jpg/04/93/56/77/1000_F_493567723_YN7jVzDOXoW2LVs9uYIg5KA3SMvAeUoP.jpg"><p>Pongal</p></div>
+<div class="item"><img src="https://facts.net/wp-content/uploads/2021/12/club-sandwich-1536x1024.jpg"><p>Sandwich</p></div>
+<div class="item"><img src="https://img.freepik.com/premium-photo/crunchy-aloo-paratha-delicacy-popular-street-food-aloo-paratha-alu-paratha-image_1174497-51132.jpg?w=2000"><p>Paratha</p></div>
+<div class="item"><img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2020/12/poori-puri-recipe.jpg"><p>puri</p></div>
+<div class="item"><img src="https://tse1.mm.bing.net/th/id/OIP._oHWCF_-5oDpq-XfllPD2QHaLH?rs=1&pid=ImgDetMain&o=7&rm=3"><p>Omelette</p></div>
 
 </div>
 
@@ -128,22 +189,44 @@ border-radius:8px;
 
 <div class="grid">
 
-<div class="item"><img src="https://source.unsplash.com/200x200/?biryani"><p>Biryani</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?fried-rice"><p>Fried Rice</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?meals"><p>Meals</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?paneer"><p>Paneer Curry</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?dal"><p>Dal Rice</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?roti"><p>Roti</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?noodles"><p>Noodles</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?veg-curry"><p>Veg Curry</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?chicken-curry"><p>Chicken Curry</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?curd-rice"><p>Curd Rice</p></div>
+<div class="item"><img src="https://pics.craiyon.com/2023-07-08/b33f3ecbb22249eb828b3b83baeeada4.webp"><p>Biryani</p></div>
+<div class="item"><img src="https://tse2.mm.bing.net/th/id/OIP.wJTgF8qg4XiMGGkG5CDRfwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"><p> veg Fried Rice</p></div>
+<div class="item"><img src="https://th.bing.com/th/id/R.8c29d303a4a2b67067b9b37b38a8930e?rik=0AwhLsInECdb4A&riu=http%3a%2f%2feastindianrecipes.net%2fwp-content%2fuploads%2f2022%2f09%2fHow-to-Make-North-Indian-Thali-Vegetarian-7.jpg&ehk=8hsvv2qJ0ZnSHgEKAYh5KkGTK0MxnGuVe3dGekTKJy8%3d&risl=&pid=ImgRaw&r=0"><p>Indian Thali</p></div>
+<div class="item"><img src="https://tse1.mm.bing.net/th/id/OIP.aIL4gpIYxJSRlVxjTn0yhAHaG6?rs=1&pid=ImgDetMain&o=7&rm=3"><p>Paneer biriyani</p></div>
+<div class="item"><img src="https://tse3.mm.bing.net/th/id/OIP.gaB-CYTHaajryDn37vsgAgHaEj?rs=1&pid=ImgDetMain&o=7&rm=3"><p>mutton biriyani</p></div>
+<div class="item"><img src="https://vivahabhojanambu.co.in/wp-content/uploads/2021/02/Ragi-Sangati-with-Natu-Kodi-Pulusu.jpg"><p>Ragi sangati with chicken</p></div>
+<div class="item"><img src="https://shwetainthekitchen.com/wp-content/uploads/2023/03/vegetable-noodles.jpg"><p> veg Noodles</p></div>
+<div class="item"><img src="https://media.istockphoto.com/photos/fried-noodles-with-chicken-directly-above-picture-id1206076029?b=1&k=20&m=1206076029&s=170667a&w=0&h=7Tl3zd-G71-6Dcvf9bC0xpc6lt_Vwc1Vx5AwDRVQ4Aw="><p> chickenNoodles</p></div>
+<div class="item"><img src="https://tse1.mm.bing.net/th/id/OIP.rZzKsAqwfLKbB_Eu4Ow0EQHaFP?rs=1&pid=ImgDetMain&o=7&rm=3"><p>curd rice</p></div>
+<div class="item"><img src="https://tse4.mm.bing.net/th/id/OIP.etdWA1My4pNi2-BrYdtxLgHaE7?rs=1&pid=ImgDetMain&o=7&rm=3"><p>gobi rice</p></div>
+<div class="item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8KUUfc7A-5hchUMeM99mfClwPvbVPW4Ib5Q&s"><p>soyachunks rice</p></div>
 
 </div>
 
 </div>
 
-<!-- DINNER -->
+<!-- snacks -->
+
+<div class="menu-section">
+
+<h2>snacks</h2>
+
+<div class="grid">
+
+<div class="item"><img src="https://tse1.mm.bing.net/th/id/OIP._LA-cq6rXkLtVbw4fE6JiQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"><p>fruit mixes</p></div>
+<div class="item"><img src="https://static.vecteezy.com/system/resources/previews/030/674/042/non_2x/product-shots-of-milkshake-high-quality-4k-ultra-free-photo.jpg"><p>milkshakes</p></div>
+<div class="item"><img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2018/12/tandoori-chicken.jpg"><p>Tandoori</p></div>
+<div class="item"><img src="https://www.pizzainn.com/wp-content/uploads/2019/12/Buffet-Close-pizzas-APPROVED.jpg"><p>Pizza</p></div>
+<div class="item"><img src="https://img.freepik.com/premium-photo/set-burgers-with-beef-tomatoes-cheese-onions-salad-street-food-top-view-black-stone-background_187166-62455.jpg?w=2000"><p>Burger</p></div>
+<div class="item"><img src="https://tse1.mm.bing.net/th/id/OIP.eUsMNX2x8YcmrWukKaTxEQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"><p>Pasta</p></div>
+<div class="item"><img src="https://www.masalakorb.com/wp-content/uploads/2023/02/EASY-MYSORE-BONDA-RECIPE-MAIDA-BONDA-MYSORE-BAJJI-V1.jpg"><p>mysore bonda</p></div>
+<div class="item"><img src="https://www.thechunkychef.com/wp-content/uploads/2021/03/Chicken-Shawarma-recipe-card.jpg"><p>Shawarma</p></div>
+<div class="item"><img src="https://tse2.mm.bing.net/th/id/OIP.dwNCU9FF9iewad7LiVBf5gHaE8?w=768&h=513&rs=1&pid=ImgDetMain&o=7&rm=3"><p>pani puri</p></div>
+<div class="item"><img src="https://www.thespruceeats.com/thmb/-O6uu2nR3pFAXg0M4Fx2S0tVuCs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1127143255-5c5f7e3546e0fb0001442255.jpg"><p>Samosa</p></div>
+
+</div>
+
+</div>
 
 <div class="menu-section">
 
@@ -151,16 +234,16 @@ border-radius:8px;
 
 <div class="grid">
 
-<div class="item"><img src="https://source.unsplash.com/200x200/?chapati"><p>Chapati</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?naan"><p>Naan</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?tandoori"><p>Tandoori</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?pizza"><p>Pizza</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?burger"><p>Burger</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?pasta"><p>Pasta</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?roll"><p>Roll</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?shawarma"><p>Shawarma</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?fried-chicken"><p>Fried Chicken</p></div>
-<div class="item"><img src="https://source.unsplash.com/200x200/?salad"><p>Salad</p></div>
+<div class="item"><img src="https://tse1.mm.bing.net/th/id/OIP.iABVK73UYywVNC4mweoCjgHaGN?rs=1&pid=ImgDetMain&o=7&rm=3"><p>Chapati </p></div>
+<div class="item"><img src="https://holycowvegan.net/wp-content/uploads/2025/05/vegan-naan-12-1.jpg"><p>naan </p></div>
+<div class="item"><img src="https://tse1.mm.bing.net/th/id/OIP.yOk4WPwApHXLfI-1G8nYRAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"><p>dal  and rice</p></div>
+<div class="item"><img src="https://tse3.mm.bing.net/th/id/OIP.-bpd2PpbLnZQS7O_pJvOMgHaFj?rs=1&pid=ImgDetMain&o=7&rm=3"><p>egg curry </p></div>
+<div class="item"><img src="https://tse3.mm.bing.net/th/id/OIP.FlkYtllqlGtOW-0ayStb5gHaE8?rs=1&pid=ImgDetMain&o=7&rm=3"><p>palak panner</p></div>
+<div class="item"><img src="https://tse2.mm.bing.net/th/id/OIP.NIlfjtaKMIwD24C51ox5FAHaLH?w=768&h=1152&rs=1&pid=ImgDetMain&o=7&rm=3"><p>butter chicken</p></div>
+<div class="item"><img src="https://vegetablerecipes.com/wp-content/uploads/2022/07/Mushroom-Rice-3-1-of-1-442x442.jpg"><p>mushroom rice</p></div>
+<div class="item"><img src="https://tse1.mm.bing.net/th/id/OIP.rZzKsAqwfLKbB_Eu4Ow0EQHaFP?rs=1&pid=ImgDetMain&o=7&rm=3"><p>curd rice</p></div>
+<div class="item"><img src="https://tse2.mm.bing.net/th/id/OIP.Bfyzdw5XoEZzPlIPWuBCbwHaE9?rs=1&pid=ImgDetMain&o=7&rm=3"><p>rasam</p></div>
+<div class="item"><img src="https://b2958125.smushcdn.com/2958125/wp-content/uploads/Madras-Style-Murungakkai-Sambar-kannammacooks.com-Recipe-Tamilnadu-Madras-style-murungakkai-sambar-idli-Indian-Chennai-drumstick.jpg?lossy=1&strip=1&webp=1"><p>sambar</p></div>
 
 </div>
 
