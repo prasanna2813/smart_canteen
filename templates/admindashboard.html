@@ -36,7 +36,7 @@ box-shadow:0 5px 10px rgba(0,0,0,0.2);
 }
 
 table{
-width:80%;
+width:85%;
 margin:auto;
 border-collapse:collapse;
 background:white;
@@ -122,9 +122,9 @@ cursor:pointer;
 <th>Quantity</th>
 <th>Total</th>
 <th>Status</th>
+<th>Token</th>
 <th>Update</th>
 <th>Action</th>
-<th>Token</th>
 </tr>
 
 {% for order in orders %}
@@ -143,7 +143,8 @@ cursor:pointer;
 <td>₹ {{order[5]}}</td>
 
 <td>{{order[6]}}</td>
-<td>{{order[7]}}</td>
+
+<td>#{{order[7]}}</td>
 
 <td>
 <button class="update">Update</button>
@@ -171,8 +172,8 @@ cursor:pointer;
 {% endfor %}
 
 <tr>
-<td colspan="5"><b>Grand Total</b></td>
-<td colspan="3"><b>₹ {{total_sales}}</b></td>
+<td colspan="4"><b>Grand Total</b></td>
+<td colspan="5"><b>₹ {{total_sales}}</b></td>
 </tr>
 
 </table>

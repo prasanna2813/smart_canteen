@@ -94,7 +94,7 @@ font-size:14px;
 
 <input type="text" id="roll" name="roll" placeholder="Enter Roll Number" required>
 
-<input type="password" id="password" name="password" placeholder="Enter Password" required>
+<input type="password" id="password" name="password" placeholder="Enter Password">
 
 <p id="error" class="error"></p>
 
@@ -111,18 +111,12 @@ font-size:14px;
 function validateLogin(){
 
 let roll=document.getElementById("roll").value;
-let password=document.getElementById("password").value;
 let error=document.getElementById("error");
 
 let rollPattern=/^[0-9]{6}$/;
 
 if(!rollPattern.test(roll)){
 error.innerText="Roll Number must be exactly 6 digits";
-return false;
-}
-
-if(password!=="svce@1999"){
-error.innerText="Password must be svce@1999";
 return false;
 }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Login</title>
+<title>The Green Bites - Admin Login</title>
 
 <style>
 
@@ -12,6 +12,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
+margin:0;
 }
 
 .login-box{
@@ -19,8 +20,13 @@ background:white;
 padding:30px;
 border-radius:10px;
 box-shadow:0 4px 10px rgba(0,0,0,0.2);
-width:300px;
+width:320px;
 text-align:center;
+}
+
+h2{
+color:#2c5364;
+margin-bottom:20px;
 }
 
 input{
@@ -39,6 +45,7 @@ color:white;
 border:none;
 border-radius:5px;
 cursor:pointer;
+font-size:16px;
 }
 
 button:hover{
@@ -55,11 +62,11 @@ background:#1d4ed8;
 
 <h2>Admin Login</h2>
 
-<form action="/adminlogin" method="post">
+<form action="/adminlogin" method="POST">
 
-<input type="text" name="username" placeholder="Username">
+<input type="text" name="username" placeholder="Enter Username" required>
 
-<input type="password" name="password" placeholder="Password">
+<input type="password" name="password" placeholder="Enter Password" required>
 
 <button type="submit">Login</button>
 
