@@ -111,12 +111,12 @@ def paydone():
     conn = get_db()
     cur = conn.cursor()
 
-    token = random.randint(100, 999)
+    token = random.randint(100,999)
 
     for item in cart:
         cur.execute(
-            "INSERT INTO orders(roll,item,price,qty,total,status,token) VALUES(?,?,?,?,?,?,?)",
-            (current_user, item[0], item[1], item[2], item[3], "Pending", token)
+        "INSERT INTO orders(roll,item,price,qty,total,status,token) VALUES(?,?,?,?,?,?,?)",
+        (current_user,item[0],item[1],item[2],item[3],"Pending",token)
         )
 
     conn.commit()
@@ -131,7 +131,7 @@ def paydone():
 
 @app.route("/success/<token>")
 def success(token):
-    return render_template("success.html", token=token)
+    return render_template("success.html",token=token)
 
 
 # ---------------- USER ORDER TRACK ----------------
@@ -150,7 +150,6 @@ def userorders():
     conn.close()
 
     return render_template("userorders.html", orders=orders)
-
 
 # ---------------- ADMIN LOGIN ----------------
 

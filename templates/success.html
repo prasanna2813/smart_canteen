@@ -26,14 +26,28 @@ h2{
 color:green;
 }
 
+.token{
+font-size:40px;
+color:#2c5364;
+margin:10px 0;
+}
+
+.buttons{
+margin-top:20px;
+}
+
 button{
-margin-top:15px;
 padding:10px 20px;
+margin:5px;
 background:#2563eb;
 color:white;
 border:none;
 border-radius:5px;
 cursor:pointer;
+}
+
+.track{
+background:#16a34a;
 }
 
 </style>
@@ -47,18 +61,23 @@ cursor:pointer;
 <h2>Payment Successful ✅</h2>
 
 <p>Your Order is Confirmed</p>
-<p>order is getting processed, thank you!</p>
-<h2>Payment Successful ✅</h2>
-
-<p>Your Order is Confirmed</p>
+<p>Order is getting processed. Thank you!</p>
 
 <h3>Your Token Number</h3>
 
-<h1 style="color:#2c5364">#{{token}}</h1>
+<div class="token">#{{token}}</div>
+
+<div class="buttons">
+
+<a href="/userorders">
+<button class="track">Track My Order</button>
+</a>
 
 <a href="/userpanel">
 <button>Back to Menu</button>
 </a>
+
+</div>
 
 </div>
 
