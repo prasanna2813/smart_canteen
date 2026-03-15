@@ -7,29 +7,32 @@ app = Flask(__name__)
 cart = []
 current_user = ""
 
-# ---------------- DATABASE ----------------
+# ---------------- DATABASE INIT ----------------
 
-conn = sqlite3.connect("database.db")
+def init_db():
+    conn = sqlite3.connect("database.db")
+    cur = conn.cursor()
 
-conn.execute("""
-CREATE TABLE IF NOT EXISTS orders(
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-roll TEXT,
-item TEXT,
-price INTEGER,
-qty INTEGER,
-total INTEGER,
-status TEXT,
-token INTEGER
-)
-""")
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS orders(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        roll TEXT,
+        item TEXT,
+        price INTEGER,
+        qty INTEGER,
+        total INTEGER,
+        status TEXT,
+        token INTEGER
+    )
+    """)
 
-conn.close()
+    conn.commit()
+    conn.close()
 
+init_db()
 
 def get_db():
     return sqlite3.connect("database.db")
-
 
 # ---------------- HOME ----------------
 
@@ -37,35 +40,30 @@ def get_db():
 def home():
     return render_template("index.html")
 
-
-# ---------------- USER LOGIN ----------------
+# ---------------- LOGIN ----------------
 
 @app.route("/login")
 def login():
     return render_template("login.html")
 
-
 @app.route("/login_check", methods=["POST"])
 def login_check():
-
     global current_user
 
     roll = request.form["roll"]
     password = request.form["password"]
 
-    if len(roll) == 6 and password == "svce@1999":
+    if password == "123":
         current_user = roll
         return redirect("/userpanel")
     else:
         return "Invalid Login"
-
 
 # ---------------- USER PANEL ----------------
 
 @app.route("/userpanel")
 def userpanel():
     return render_template("userpanel.html")
-
 
 # ---------------- ADD TO CART ----------------
 
@@ -82,8 +80,7 @@ def add_to_cart():
 
     return redirect("/cart")
 
-
-# ---------------- CART PAGE ----------------
+# ---------------- CART ----------------
 
 @app.route("/cart")
 def cart_page():
@@ -92,8 +89,7 @@ def cart_page():
 
     return render_template("cart.html", cart=cart, total=total)
 
-
-# ---------------- CHECKOUT → PAYMENT ----------------
+# ---------------- CHECKOUT ----------------
 
 @app.route("/checkout")
 def checkout():
@@ -101,7 +97,6 @@ def checkout():
     total = sum(i[3] for i in cart)
 
     return render_template("payment.html", total=total)
-
 
 # ---------------- PAYMENT DONE ----------------
 
@@ -114,6 +109,7 @@ def paydone():
     token = random.randint(100,999)
 
     for item in cart:
+
         cur.execute(
         "INSERT INTO orders(roll,item,price,qty,total,status,token) VALUES(?,?,?,?,?,?,?)",
         (current_user,item[0],item[1],item[2],item[3],"Pending",token)
@@ -126,15 +122,13 @@ def paydone():
 
     return redirect(f"/success/{token}")
 
-
-# ---------------- SUCCESS PAGE ----------------
+# ---------------- SUCCESS ----------------
 
 @app.route("/success/<token>")
 def success(token):
-    return render_template("success.html",token=token)
+    return render_template("success.html", token=token)
 
-
-# ---------------- USER ORDER TRACK ----------------
+# ---------------- USER ORDERS ----------------
 
 @app.route("/userorders")
 def userorders():
@@ -157,7 +151,6 @@ def userorders():
 def adminlogin():
     return render_template("adminlogin.html")
 
-
 @app.route("/admin_check", methods=["POST"])
 def admin_check():
 
@@ -167,8 +160,7 @@ def admin_check():
     if username == "admin" and password == "admin123":
         return redirect("/admin")
     else:
-        return "Invalid Admin Login"
-
+        return "Invalid Login"
 
 # ---------------- ADMIN DASHBOARD ----------------
 
@@ -192,35 +184,6 @@ def admin():
         total_sales=total_sales
     )
 
-
-# ---------------- UPDATE QUANTITY ----------------
-
-@app.route("/update/<int:id>", methods=["POST"])
-def update(id):
-
-    qty = int(request.form["qty"])
-
-    conn = get_db()
-    cur = conn.cursor()
-
-    price = cur.execute(
-        "SELECT price FROM orders WHERE id=?",
-        (id,)
-    ).fetchone()[0]
-
-    total = price * qty
-
-    cur.execute(
-        "UPDATE orders SET qty=?, total=? WHERE id=?",
-        (qty, total, id)
-    )
-
-    conn.commit()
-    conn.close()
-
-    return redirect("/admin")
-
-
 # ---------------- ACCEPT ORDER ----------------
 
 @app.route("/accept/<int:id>")
@@ -238,7 +201,6 @@ def accept(id):
     conn.close()
 
     return redirect("/admin")
-
 
 # ---------------- ORDER READY ----------------
 
@@ -258,8 +220,7 @@ def reached(id):
 
     return redirect("/admin")
 
-
-# ---------------- DELETE ORDER ----------------
+# ---------------- DELETE ----------------
 
 @app.route("/delete/<int:id>")
 def delete(id):
@@ -267,18 +228,14 @@ def delete(id):
     conn = get_db()
     cur = conn.cursor()
 
-    cur.execute(
-        "DELETE FROM orders WHERE id=?",
-        (id,)
-    )
+    cur.execute("DELETE FROM orders WHERE id=?", (id,))
 
     conn.commit()
     conn.close()
 
     return redirect("/admin")
 
-
 # ---------------- RUN ----------------
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)
