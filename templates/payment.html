@@ -20,10 +20,21 @@ padding:30px;
 border-radius:10px;
 box-shadow:0 4px 10px rgba(0,0,0,0.2);
 text-align:center;
+width:350px;
 }
 
-img{
-width:200px;
+h2{
+color:#2c5364;
+}
+
+.amount{
+font-size:24px;
+font-weight:bold;
+margin:10px 0;
+color:#2563eb;
+}
+
+.qr{
 margin:20px 0;
 }
 
@@ -44,17 +55,21 @@ cursor:pointer;
 
 <div class="box">
 
-<h2>UPI Payment</h2>
+<h2>Scan & Pay</h2>
 
-<h3>Total: ₹{{total}}</h3>
+<p>Total Amount</p>
 
-<p>Scan QR Code to Pay</p>
+<div class="amount">₹ {{total}}</div>
 
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay">
+<div class="qr">
 
-<br>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=example@upi&pn=GreenBites&am={{total}}" alt="QR Code">
 
-<a href="/success">
+</div>
+
+<p>Scan using any UPI app</p>
+
+<a href="/success/{{token}}">
 <button>Payment Done</button>
 </a>
 

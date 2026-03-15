@@ -79,6 +79,7 @@ cursor:pointer;
 <th>Quantity</th>
 <th>Total</th>
 <th>Status</th>
+<th>Token</th>
 </tr>
 
 {% for order in orders %}
@@ -102,10 +103,11 @@ cursor:pointer;
 {% elif order[6] == "Reached" %}
 <span class="reached">🟢 Ready</span>
 
+
 {% endif %}
 
 </td>
-
+<td>#{{order[7]}}</td>
 </tr>
 
 {% endfor %}
